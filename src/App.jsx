@@ -16,29 +16,29 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">📚 DSA Roadmap Tracker</h1>
       {roadmap.map((phase, idx) => (
-        <div key={idx} className="mb-6 p-4 bg-gray-800 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-3">{phase.phase}</h2>
-          <ul className="space-y-2">
-            {phase.topics.map((topic, i) => (
-              <li
-                key={i}
-                className={`flex items-center justify-between p-2 rounded ${
-                  completed[topic] ? "bg-green-700" : "bg-gray-700"
-                }`}
-              >
-                <span>{topic}</span>
+        <div key={idx} className="mb-8">
+          <h2 className="text-2xl text-red-500 font-semibold mb-4">{phase.phase}</h2>
+          {phase.topics.map((topic, i) => (
+            <div key={i} className="mb-4 p-4 bg-gray-800 rounded-lg shadow">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-blue-500">{topic.title}</span>
                 <input
                   type="checkbox"
-                  checked={completed[topic] || false}
-                  onChange={() => toggleTopic(topic)}
+                  checked={completed[topic.title] || false}
+                  onChange={() => toggleTopic(topic.title)}
                   className="w-5 h-5 accent-green-500"
                 />
-              </li>
-            ))}
-          </ul>
+              </div>
+              <ul className="mt-2 ml-4 list-disc text-gray-300 space-y-1">
+                {topic.details.map((point, idx2) => (
+                  <li key={idx2}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       ))}
     </div>
